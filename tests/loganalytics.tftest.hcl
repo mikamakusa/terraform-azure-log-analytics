@@ -5,7 +5,7 @@ run "setup_tests" {
 }
 
 run "create_log_analytics_worspace" {
-  command = [plan,apply]
+  command = plan
 
   variables {
     resource_group_name           = "rg-test"
