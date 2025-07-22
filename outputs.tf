@@ -1,177 +1,107 @@
 ## CLUSTER ##
 
-output "cluster_id" {
-  value = try(
-    azurerm_log_analytics_cluster.this.*.id
-  )
-}
-
-output "cluster_name" {
-  value = try(
-    azurerm_log_analytics_cluster.this.*.name
-  )
+output "cluster" {
+  value = {
+    for a in azurerm_log_analytics_cluster.this : a => {
+      id         = a.id
+      name       = a.name
+      tags       = a.tags
+      cluster_id = a.cluster_id
+    }
+  }
 }
 
 ## DATA EXPORT RULE ##
 
-output "data_export_rule_id" {
-  value = try(
-    azurerm_log_analytics_data_export_rule.this.*.id
-  )
-}
-
-output "data_export_rule_name" {
-  value = try(
-    azurerm_log_analytics_data_export_rule.this.*.name
-  )
+output "export_rule" {
+  value = {
+    for a in azurerm_log_analytics_data_export_rule.this : a => {
+      id             = a.id
+      export_rule_id = a.export_rule_id
+    }
+  }
 }
 
 ## DATA SOURCES ##
 
-output "datasource_windows_event_id" {
-  value = try(
-    azurerm_log_analytics_datasource_windows_event.this.*.id
-  )
-}
-
-output "datasource_windows_event_name" {
-  value = try(
-    azurerm_log_analytics_datasource_windows_event.this.*.name
-  )
-}
-
-output "datasource_windows_event_log_name" {
-  value = try(
-    azurerm_log_analytics_datasource_windows_event.this.*.event_log_name
-  )
-}
-
-output "datasource_windows_event_types" {
-  value = try(azurerm_log_analytics_datasource_windows_event.this.*.event_types)
-}
-
-output "datasource_windows_performance_counter_id" {
-  value = try(
-    azurerm_log_analytics_datasource_windows_performance_counter.this.*.id
-  )
-}
-
-output "datasource_windows_performance_counter_name" {
-  value = try(
-    azurerm_log_analytics_datasource_windows_performance_counter.this.*.name
-  )
+output "windows_event" {
+  value = {
+    for a in azurerm_log_analytics_datasource_windows_event.this : a => {
+      id = a.id
+    }
+  }
 }
 
 ## LINKED SERVICE ##
 
-output "linked_service_id" {
-  value = try(
-    azurerm_log_analytics_linked_service.this.*.id
-  )
-}
-
-output "linked_service_name" {
-  value = try(
-    azurerm_log_analytics_linked_service.this.*.name
-  )
+output "linked_service" {
+  value = {
+    for a in azurerm_log_analytics_linked_service.this : a => {
+      id   = a.id
+      name = a.name
+    }
+  }
 }
 
 ## LINKED STORAGE ACCOUNT ##
 
-output "linked_storage_account_id" {
-  value = try(
-    azurerm_log_analytics_linked_storage_account.this.*.id
-  )
+output "linked_storage_account" {
+  value = {
+    for a in azurerm_log_analytics_linked_storage_account.this : a => {
+      id = a.id
+    }
+  }
 }
 
 ## QUERY PACK ##
 
-output "query_pack_id" {
-  value = try(
-    azurerm_log_analytics_query_pack.this.*.id
-  )
-}
-
-output "query_pack_name" {
-  value = try(
-    azurerm_log_analytics_query_pack.this.*.name
-  )
-}
-
-output "query_pack_query_name" {
-  value = try(
-    azurerm_log_analytics_query_pack_query.this.*.name
-  )
-}
-
-output "query_pack_query_id" {
-  value = try(
-    azurerm_log_analytics_query_pack_query.this.*.id
-  )
+output "query_pack" {
+  value = {
+    for a in azurerm_log_analytics_query_pack.this : a => {
+      id = a.id
+    }
+  }
 }
 
 ## SOLUTION ##
 
-output "solution_id" {
-  value = try(
-    azurerm_log_analytics_solution.this.*.id
-  )
-}
-
-output "solution_name" {
-  value = try(
-    azurerm_log_analytics_solution.this.*.solution_name
-  )
-}
-
-output "solution_plan" {
-  value = try(
-    azurerm_log_analytics_solution.this.*.plan
-  )
+output "solution" {
+  value = {
+    for a in azurerm_log_analytics_solution.this : a => {
+      id = a.id
+    }
+  }
 }
 
 ## STORAGE INSIGHTS ##
 
-output "storage_insights_id" {
-  value = try(
-    azurerm_log_analytics_storage_insights.this.*.id
-  )
-}
-
-output "storage_insights_name" {
-  value = try(
-    azurerm_log_analytics_storage_insights.this.*.name
-  )
+output "storage_insights" {
+  value = {
+    for a in azurerm_log_analytics_storage_insights.this : a => {
+      id = a.id
+    }
+  }
 }
 
 ## WORKSPACE ##
 
-output "workspace_id" {
-  value = try(
-    azurerm_log_analytics_workspace.this.*.id
-  )
-}
-
-output "workspace_name" {
-  value = try(
-    azurerm_log_analytics_workspace.this.*.name
-  )
-}
-
-output "workspace_sku" {
-  value = try(
-    azurerm_log_analytics_workspace.this.*.sku
-  )
-}
-
-output "workspace_table_id" {
-  value = try(
-    azurerm_log_analytics_workspace_table.this.*.id
-  )
-}
-
-output "workspace_table_name" {
-  value = try(
-    azurerm_log_analytics_workspace_table.this.*.name
-  )
+output "workspace" {
+  value = {
+    for a in azurerm_log_analytics_workspace.this : a => {
+      id                                      = a.id
+      name                                    = a.name
+      sku                                     = a.sku
+      allow_resource_only_permissions         = a.allow_resource_only_permissions
+      cmk_for_query_forced                    = a.cmk_for_query_forced
+      daily_quota_gb                          = a.daily_quota_gb
+      data_collection_rule_id                 = a.data_collection_rule_id
+      immediate_data_purge_on_30_days_enabled = a.immediate_data_purge_on_30_days_enabled
+      internet_ingestion_enabled              = a.internet_ingestion_enabled
+      internet_query_enabled                  = a.internet_query_enabled
+      local_authentication_disabled           = a.local_authentication_disabled
+      primary_shared_key                      = a.primary_shared_key
+      secondary_shared_key                    = a.secondary_shared_key
+      workspace_id                            = a.workspace_id
+    }
+  }
 }
